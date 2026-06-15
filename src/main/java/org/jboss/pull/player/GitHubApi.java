@@ -265,7 +265,7 @@ public class GitHubApi {
         // Build a list of the new labels
         final String sb = getLabelsArray(labels);
         try {
-            execute(URI.create(issueUrl + "/labels"), "POST", HttpRequest.BodyPublishers.ofString(sb));
+            execute(URI.create(issueUrl + "/labels"), "PUT", HttpRequest.BodyPublishers.ofString(sb));
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
