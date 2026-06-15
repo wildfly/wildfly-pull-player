@@ -31,11 +31,10 @@ public class PullPlayer {
         int teamcityPort = Integer.parseInt(Util.require("teamcity.port"));
         String teamcityBranchMapping = Util.require("teamcity.build.branch-mapping");
         githubLogin = Util.require("github.login");
-        String githubToken = Util.require("github.token");
         String githubRepo = Util.require("github.repo");
         String user = Util.require("teamcity.user");
         String password = Util.require("teamcity.password");
-        gitHubApi = new GitHubApi(githubToken, githubRepo, dryRun);
+        gitHubApi = new GitHubApi(githubRepo, dryRun);
 
         final boolean disabled = Util.optionalBoolean("teamcity.disabled", false);
         this.whitelistEnabled = Util.optionalBoolean("whitelist.enabled", true);

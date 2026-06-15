@@ -41,7 +41,7 @@ public class GitHubApi {
     private final AtomicBoolean cacheDirty = new AtomicBoolean(false);
     private final Properties cache = getCache();
 
-    public GitHubApi(String authToken, String repository, boolean dryRun) {
+    public GitHubApi(String repository, boolean dryRun) {
         this.dryRun = dryRun;
         this.baseUrl = GITHUB_API_URL + "/repos/" + repository;
         this.httpClient = HttpClient.newHttpClient();
