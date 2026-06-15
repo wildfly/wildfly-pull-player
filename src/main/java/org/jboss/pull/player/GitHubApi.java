@@ -434,7 +434,7 @@ public class GitHubApi {
             // Get all the issues for the repository
             String url = baseUrl + "/issues?state=open&filter=all";
             while (url != null) {
-                final var response = execute(URI.create(baseUrl));
+                final var response = execute(URI.create(url));
                 url = nextLink(response);
                 if (notModified(response)) { //noting new to do
                     return Collections.emptyList();
