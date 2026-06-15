@@ -261,6 +261,7 @@ public class TeamCityApi {
             prop.get("value").set(branch);
             final HttpRequest request = HttpRequest.newBuilder(URI.create(baseUrl + "/app/rest/buildQueue"))
                     .POST(HttpRequest.BodyPublishers.ofString(build.toJSONString(false)))
+                    .header("Content-Type", "application/json")
                     .header("Accept-Encoding", "UTF-8")
                     .header("Accept", "application/json")
                     .build();
