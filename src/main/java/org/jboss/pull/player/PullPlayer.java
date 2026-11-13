@@ -113,10 +113,10 @@ public class PullPlayer {
             String job = null;
             // if mergeCommitSha isn't set, we're still waiting on the gh api to update the /merge ref, so we'll retry
             if (mergeCommitSha != null) {
-                job = Jobs.getCompletedJob(sha1);
+                job = Jobs.getCompletedJob(pullNumber, sha1);
                 // also look for a previously completed job via mergecommitsha also, this is for compat with some already run jobs
                 if (job == null) {
-                    job = Jobs.getCompletedJob(mergeCommitSha);
+                    job = Jobs.getCompletedJob(pullNumber, mergeCommitSha);
                 }
             }
             // comments == null indicates a NOT-MODIFIED response. A new PR will have an empty
@@ -205,7 +205,8 @@ public class PullPlayer {
                     System.out.println("Build already running");
                 } else {
                     job = null;
-                    Jobs.remove(sha1);
+                    Jobs.remove(pullNumber, sha1);
+                    Jobs.remove(pullNumber, mergeCommitSha);
                 }
             }
 
@@ -220,7 +221,7 @@ public class PullPlayer {
 
             if (build != null && !retrigger) {
                 if (build.getStatus() != null) {
-                    Jobs.storeCompletedJob(sha1, pullNumber, build.getBuild());
+                    Jobs.storeCompletedJob(pullNumber, sha1, build.getBuild());
                 } else {
                     System.out.println("In progress, skipping: " + pullNumber);
                 }
