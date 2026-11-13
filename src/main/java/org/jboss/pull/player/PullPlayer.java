@@ -131,7 +131,7 @@ public class PullPlayer {
                         continue;
                     }
 
-                    if (!whiteList.has(user) && adminList.has(comment.user) && okToTest.matcher(comment.comment).matches() || comment.comment.startsWith(Command.OK_TO_TEST.getCommand())) {
+                    if (!whiteList.has(user) && adminList.has(comment.user) && (okToTest.matcher(comment.comment).matches() || comment.comment.startsWith(Command.OK_TO_TEST.getCommand()))) {
                         whiteList.add(user);
                         retriggerDate = comment.created;
                         retrigger = true;
