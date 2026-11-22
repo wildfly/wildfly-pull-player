@@ -81,7 +81,6 @@ public class PullPlayer {
 
             boolean help = false;
             boolean retrigger = false;
-            boolean retriggerFailed = false;
             Instant retriggerDate = null;
             boolean whitelistNotify = true;
             String commentId = "";
@@ -135,13 +134,6 @@ public class PullPlayer {
                         whiteList.add(user);
                         retriggerDate = comment.created;
                         retrigger = true;
-                    }
-
-                    if (!whiteList.has(user) && adminList.has(comment.user) && comment.comment.startsWith(Command.RETEST_FAILED.getCommand())) {
-                        whiteList.add(user);
-                        retriggerDate = comment.created;
-                        retrigger = false;
-                        retriggerFailed = true;
                     }
 
                     if (githubLogin.equals(comment.user) && comment.comment.contains("triggering")) {
@@ -270,9 +262,7 @@ public class PullPlayer {
         StringBuilder buf = new StringBuilder();
         buf.append("<p>Available Commands:</p>");
         for (Command c : Command.values()) {
-            if (c.enabled()) {
-                buf.append("<p><b>" + c.getCommand() + "</b> " + c.getDescription() + "</p>");
-            }
+            buf.append("<p><b>" + c.getCommand() + "</b> " + c.getDescription() + "</p>");
         }
         return buf.toString();
     }
